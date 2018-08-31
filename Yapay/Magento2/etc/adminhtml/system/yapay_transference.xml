@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="yapay_transference" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Intermediary Yapay - Transference Online</label>
+        <field id="active" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Enabled</label>
+            <source_model>Yapay\Magento2\Model\System\Config\Yesno</source_model>
+        </field>
+
+        <field id="status_new_order_transference_yapay" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Status of new orders</label>
+            <depends>
+                <field id="active">1</field>
+            </depends>
+            <source_model>Yapay\Magento2\Model\System\Config\OrderStatus</source_model>
+        </field>
+        <field id="available_payment_transference_yapay" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Means of payment available</label>
+            <depends>
+                <field id="active">1</field>
+            </depends>
+            <tooltip>Means of payment available Yapay Checkout.</tooltip>
+            <source_model>Yapay\Magento2\Model\System\Config\TefPaymentMethods</source_model>
+        </field>
+        <!--
+        <field id="automatically_generate_invoice_transference_yapay" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Automatically generate invoice for orders with virtual products?</label>
+            <depends>
+                <field id="active">1</field>
+            </depends>
+            <source_model>Yapay\Magento2\Model\System\Config\Yesno</source_model>
+        </field>
+
+        <field id="order_prefix_transference_yapay" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Order Prefix</label>
+            <depends>
+                <field id="active">1</field>
+            </depends>
+        </field>
+        -->
+        <!--<field id="order_display_transference_yapay" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">-->
+            <!--<label>Order Display</label>-->
+            <!--<depends>-->
+                <!--<field id="active">1</field>-->
+            <!--</depends>-->
+        <!--</field>-->
+    </group>
+</include>
