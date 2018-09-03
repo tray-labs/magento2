@@ -1,25 +1,18 @@
 <?xml version="1.0"?>
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <group id="yapay_transference" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Intermediary Yapay - Transference Online</label>
+    <group id="yapay_transference" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Yapay Intermediador - Transferência Online</label>
         <field id="active" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
-            <label>Enabled</label>
+            <label>Ativo</label>
             <source_model>Yapay\Magento2\Model\System\Config\Yesno</source_model>
         </field>
 
-        <field id="status_new_order_transference_yapay" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="0">
-            <label>Status of new orders</label>
-            <depends>
-                <field id="active">1</field>
-            </depends>
-            <source_model>Yapay\Magento2\Model\System\Config\OrderStatus</source_model>
-        </field>
         <field id="available_payment_transference_yapay" translate="label" type="multiselect" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="0">
-            <label>Means of payment available</label>
+            <label>Métodos de pagamento disponíveis</label>
             <depends>
                 <field id="active">1</field>
             </depends>
-            <tooltip>Means of payment available Yapay Checkout.</tooltip>
+            <tooltip>Métodos de pagamento disponíveis no Yapay Checkout.</tooltip>
             <source_model>Yapay\Magento2\Model\System\Config\TefPaymentMethods</source_model>
         </field>
         <!--

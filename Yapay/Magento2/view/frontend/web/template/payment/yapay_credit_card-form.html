@@ -33,7 +33,7 @@
 
     <div class="field number required">
         <label data-bind="attr: {for: getCode() + '_cc_number'}" class="label">
-            <span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Número do cartão de crédito'--><!-- /ko --></span>
         </label>
         <div class="control">
             <input type="number" name="payment[cc_number]" class="input-text" value=""
@@ -50,7 +50,7 @@
     </div>
     <div class="field date required" data-bind="attr: {id: getCode() + '_cc_type_exp_div'}">
         <label data-bind="attr: {for: getCode() + '_expiration'}" class="label">
-            <span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Data de validade'--><!-- /ko --></span>
         </label>
         <div class="control">
             <div class="fields group group-2">
@@ -63,7 +63,7 @@
                                             options: getCcMonthsValues(),
                                             optionsValue: 'value',
                                             optionsText: 'month',
-                                            optionsCaption: $t('Month'),
+                                            optionsCaption: $t('Mês'),
                                             value: creditCardExpMonth">
                         </select>
                     </div>
@@ -77,7 +77,7 @@
                                            options: getCcYearsValues(),
                                            optionsValue: 'value',
                                            optionsText: 'year',
-                                           optionsCaption: $t('Year'),
+                                           optionsCaption: $t('Ano'),
                                            value: creditCardExpYear">
                         </select>
                     </div>
@@ -87,7 +87,7 @@
     </div>
     <div class="field text required">
         <label data-bind="attr: {for: getCode() + '_cc_cardholder'}" class="label">
-            <span><!-- ko i18n: 'Cardholder'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Portador do cartão'--><!-- /ko --></span>
         </label>
         <div class="control">
             <input type="text" name="payment[cc_cardholder]" class="input-text" value=""
@@ -104,7 +104,7 @@
     </div>
     <div class="field number required">
         <label data-bind="attr: {for: getCode() + '_cc_security_code'}" class="label">
-            <span><!-- ko i18n: 'Credit Card Security Code'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Código de segurança do cartão'--><!-- /ko --></span>
         </label>
         <div class="control">
             <input type="number" name="payment[cc_security_code]" class="input-text" value=""
@@ -121,7 +121,7 @@
     </div>
     <div class="field number required">
         <label data-bind="attr: {for: getCode() + '_cc_installments'}" class="label">
-            <span><!-- ko i18n: 'Installments'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Parcelas'--><!-- /ko --></span>
         </label>
         <div class="control">
             <select name="payment[cc_installments]" class="select"
@@ -142,7 +142,7 @@
     <!-- ko if: (hasVerification())-->
     <div class="field cvv required" data-bind="attr: {id: getCode() + '_cc_type_cvv_div'}">
         <label data-bind="attr: {for: getCode() + '_cc_cid'}" class="label">
-            <span><!-- ko i18n: 'Card Verification Number'--><!-- /ko --></span>
+            <span><!-- ko i18n: 'Número de verificação do cartão'--><!-- /ko --></span>
         </label>
         <div class="control _with-tooltip">
             <input type="number"

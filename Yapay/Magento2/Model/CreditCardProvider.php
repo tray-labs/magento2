@@ -220,7 +220,7 @@ class CreditCardProvider implements ConfigProviderInterface
         for($i = 0; $i < $this->Installment(); $i++) {
             $totalOrderInterest = number_format($totalOrder + ($totalOrder * floatval($interestInstallment[$i])) / 100, 2, ',', '.');
             $totalInstallment = number_format(floatval($totalOrderInterest) / ($i +1),  2, ',', '.');
-            array_push($plotsContainingInterest, $i+1 . ' x R$' .$totalInstallment. ' Total Payment = R$' .$totalOrderInterest);
+            array_push($plotsContainingInterest, $i+1 . ' x R$' .$totalInstallment. ' Total à Pagar = R$' .$totalOrderInterest);
         }
 
         return $plotsContainingInterest;

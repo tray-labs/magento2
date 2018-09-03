@@ -193,7 +193,21 @@ define(
              * @returns {*}
              */
             getCcMonths: function() {
-                return window.checkoutConfig.payment.yapay_credit_card.months['yapay_credit_card'];
+                var months = {
+                    1 : "01 - Janeiro",
+                    2 : "02 - Fevereiro",
+                    3 : "03 - Março",
+                    4 : "04 - Abril",
+                    5 : "05 - Maio",
+                    6 : "06 - Junho",
+                    7 : "07 - Julho",
+                    8 : "08 - Agosto",
+                    9 : "09 - Setembro",
+                    10 : "10 - Outubro",
+                    11 : "11 - Novembro",
+                    12 : "12 - Dezembro"
+                };
+                return months;
             },
 
             /**

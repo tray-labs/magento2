@@ -4,7 +4,7 @@
     <default>
         <payment>
             <yapay_credit_card>
-                <title>Intermediary Yapay - Credit Cards</title>
+                <title>Yapay Intermediador - Cartão de Crédito</title>
                 <order_status>pending_payment</order_status>
                 <instructions>Instruction.</instructions>
                 <payment_action>true</payment_action>
@@ -26,7 +26,7 @@
 
             </yapay_credit_card>
             <yapay_bank_slip>
-                <title>Intermediary Yapay - Bank Slip</title>
+                <title>Yapay Intermediador - Boleto</title>
                 <order_status>pending_payment</order_status>
                 <instructions>Instruction.</instructions>
                 <payment_action>true</payment_action>
@@ -37,7 +37,7 @@
             <yapay_transference>
                 <order_status>pending_payment</order_status>
                 <payment_action>true</payment_action>
-                <title>Intermediary Yapay - Transference Online</title>
+                <title>Yapay Intermediador - Transferência Online</title>
                 <active>0</active>
                 <model>Yapay\Magento2\Model\Payment\TransferenceYapay</model>
                 <group>offline</group>

@@ -82,6 +82,18 @@ define(
                 }
             },
             {
+                title: 'Aura',
+                type: 'aura',
+                payment_id: '18',
+                pattern: '^50[0-9]{14,17}$',
+                gaps: [4, 8, 12],
+                lengths: [12, 13, 14, 15, 16, 17, 18, 19],
+                code: {
+                    name: 'CVV',
+                    size: 3
+                }
+            },
+            {
                 title: 'Elo',
                 type: 'elo',
                 payment_id: '16',
@@ -94,18 +106,6 @@ define(
                 }
             },
             {
-                title: 'Aura',
-                type: 'aura',
-                payment_id: '18',
-                pattern: '^50[0-9]{14,17}$',
-                gaps: [4, 8, 12],
-                lengths: [12, 13, 14, 15, 16, 17, 18, 19],
-                code: {
-                    name: 'CVV',
-                    size: 3
-                }
-            },
-			{
                 title: 'HIPER',
                 type: 'hiper',
                 payment_id: '25',
@@ -146,9 +146,13 @@ define(
                 for (i = 0; i < types.length; i++) {
                     value = types[i];
                     if (new RegExp(value.pattern).test(cardNumber)) {
-						
                         result.push($.extend(true, {}, value));
                     }
+                }
+                console.log(result)
+                if(result.length > 1) {
+                    console.log([result[1]])
+                    return [result[1]]
                 }
                 return result;
             }
