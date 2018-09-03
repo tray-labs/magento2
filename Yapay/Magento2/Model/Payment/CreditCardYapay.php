@@ -4,7 +4,6 @@ namespace Yapay\Magento2\Model\Payment;
 
 use Yapay\Magento2\Helper\Data;
 use Yapay\Magento2\Helper\ValidationYapay;
-use Magento\Sales\Model\Order;
 
 
 class CreditCardYapay extends PaymentAbstract

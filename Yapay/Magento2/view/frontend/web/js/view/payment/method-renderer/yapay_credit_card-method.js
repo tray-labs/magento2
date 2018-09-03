@@ -355,6 +355,20 @@ define(
             },
 
             /**
+             * Busca o Bairro do Cliente
+             * @returns {*}
+             */
+            getNeighborhood: function() {
+                if(checkoutData.getShippingAddressFromData() != null) {
+                    if (checkoutData.getShippingAddressFromData().custom_attributes != undefined) {
+                        return checkoutData.getShippingAddressFromData().custom_attributes.neighborhood_yapay;
+                    }
+                }
+                return '';
+            },
+
+
+            /**
              * Envia request com os dados do cartão
              * @returns {{method: *, additional_data: {cc_number: *, cc_card: *, cc_exp_month: *, cc_exp_year: *, cc_cardholder: *, cc_installments: *, cc_security_code: *}}}
              */
@@ -370,7 +384,8 @@ define(
                         'cc_installments': jQuery('#'+this.getCode()+'cc_installments').val(),
                         'cc_security_code': jQuery('#'+this.getCode()+'cc_security_code').val(),
                         'cpfCustomer': this.getCpfCustomer(),
-                        'cnpjCustomer': this.getCnpjCustomer()
+                        'cnpjCustomer': this.getCnpjCustomer(),
+                        'neighborhoodCustomer': this.getNeighborhood(),
                     }
                 };
             },

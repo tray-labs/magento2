@@ -2,7 +2,6 @@
 
 namespace Yapay\Magento2\Setup;
 
-use Magento\Framework\Module\Setup\Migration;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
@@ -51,6 +50,11 @@ class InstallData implements InstallDataInterface
 
     }
 
+    /**
+     * Método utilizado para cadastrar e editar cpf
+     * @param $setup
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     protected function createCPF($setup)
     {
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
@@ -92,6 +96,11 @@ class InstallData implements InstallDataInterface
 
     }
 
+    /**
+     * Método utilizado para cadastrar e editar cnpj
+     * @param $setup
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     protected function createCNPJ($setup)
     {
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
@@ -132,6 +141,11 @@ class InstallData implements InstallDataInterface
         $cnpj->save();
     }
 
+    /**
+     * Método utilizado para cadastrar e editar telefone
+     * @param $setup
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     protected function CreatePhone($setup)
     {
         {

@@ -69,6 +69,19 @@ define(
                 return '';
             },
 
+            /**
+             * Busca o Bairro do Cliente
+             * @returns {*}
+             */
+            getNeighborhood: function() {
+                if(checkoutData.getShippingAddressFromData() != null) {
+                    if (checkoutData.getShippingAddressFromData().custom_attributes != undefined) {
+                        return checkoutData.getShippingAddressFromData().custom_attributes.neighborhood_yapay;
+                    }
+                }
+                return '';
+            },
+
 
             /**
              * Envia request com os dados do boleto
@@ -79,7 +92,8 @@ define(
                     'method': this.item.method,
                     'additional_data': {
                         'cpfCustomer': this.getCpfCustomer(),
-                        'cnpjCustomer': this.getCnpjCustomer()
+                        'cnpjCustomer': this.getCnpjCustomer(),
+                        'neighborhoodCustomer': this.getNeighborhood(),
                     }
                 };
             },

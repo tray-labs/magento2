@@ -80,6 +80,19 @@ define(
                 }
                 return '';
             },
+            /**
+             * Busca o Bairro do Cliente
+             * @returns {*}
+             */
+            getNeighborhood: function() {
+                if(checkoutData.getShippingAddressFromData() != null) {
+                    if (checkoutData.getShippingAddressFromData().custom_attributes != undefined) {
+                        return checkoutData.getShippingAddressFromData().custom_attributes.neighborhood_yapay;
+                    }
+                }
+                return '';
+            },
+
 
             /**
              * Busca tipos de transferencias disponiveis
@@ -115,7 +128,8 @@ define(
                     'additional_data': {
                         'payment_method_id': jQuery('#'+this.getCode()+'tt_paymentMethod').val(),
                         'cpfCustomer': this.getCpfCustomer(),
-                        'cnpjCustomer': this.getCnpjCustomer()
+                        'cnpjCustomer': this.getCnpjCustomer(),
+                        'neighborhoodCustomer': this.getNeighborhood(),
                     }
                 };
             },

@@ -65,6 +65,12 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
         return self::URL_SANDBOX;
     }
 
+    /**
+     * Responsavel por validar o cpf e cnpj
+     * @param $cpf
+     * @param $cnpj
+     * @return mixed
+     */
     public function checkCpfAndCnpj($cpf, $cnpj)
     {
         $cpf = preg_replace( '#[^0-9]#', '', $cpf);
@@ -142,10 +148,44 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
                     ]
                 ]
             ];
-
-
+        
         return $customerCheckout;
 
+    }
+
+    function checkStates($stateName)
+    {
+        $brazilianStates = array(
+            'AC'=>'Acre',
+            'AL'=>'Alagoas',
+            'AP'=>'Amapá',
+            'AM'=>'Amazonas',
+            'BA'=>'Bahia',
+            'CE'=>'Ceará',
+            'DF'=>'Distrito Federal',
+            'ES'=>'Espírito Santo',
+            'GO'=>'Goiás',
+            'MA'=>'Maranhão',
+            'MT'=>'Mato Grosso',
+            'MS'=>'Mato Grosso do Sul',
+            'MG'=>'Minas Gerais',
+            'PA'=>'Pará',
+            'PB'=>'Paraíba',
+            'PR'=>'Paraná',
+            'PE'=>'Pernambuco',
+            'PI'=>'Piauí',
+            'RJ'=>'Rio de Janeiro',
+            'RN'=>'Rio Grande do Norte',
+            'RS'=>'Rio Grande do Sul',
+            'RO'=>'Rondônia',
+            'RR'=>'Roraima',
+            'SC'=>'Santa Catarina',
+            'SP'=>'São Paulo',
+            'SE'=>'Sergipe',
+            'TO'=>'Tocantins'
+        );
+        $result = array_search($stateName, $brazilianStates);
+        return $result;
     }
     /**
      * Gera os dados do cliente
@@ -155,12 +195,12 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     function generateCustomerData($paymentData)
     {
-
         $order = $paymentData->getOrder();
 
         $street = $order->getBillingAddress()->getStreet();
         $objectManager = ObjectManager::getInstance();
 
+        $state = $this->checkStates($order->getBillingAddress()->getRegion());
 
         if($order->getCustomerId() != null) {
             $customerCheckout = $this->getCheckoutUser($paymentData);
@@ -186,9 +226,11 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
                 [
                     'type_address' => self::TYPE_ADDRESS,
                     'street' => $street[0],
-                    'number' => $order->getBillingAddress()->getAddressType(),
+                    'number' => 'Não informado',
                     'city' => $order->getBillingAddress()->getCity(),
                     'state' => $order->getBillingAddress()->getRegion(),
+                    'neighborhood' => $paymentData->getData('additional_information')['neighborhoodCustomer'],
+                    'state' => $state,
                     'neighborhood' => $street[1] ?? 'Não informado',
                     'completion' => $street[2] ?? '',
                     'postal_code' => $order->getBillingAddress()->getPostcode()

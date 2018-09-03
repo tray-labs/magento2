@@ -6,7 +6,6 @@ use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\View\Asset\Source;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Payment\Model\CcConfig;
-use Magento\Sales\Model\Order;
 use Magento\Checkout\Model\Cart;
 use Magento\Framework\App\ObjectManager;
 
@@ -76,7 +75,6 @@ class CreditCardProvider implements ConfigProviderInterface
                     'installments' => $this->Installment(),
                     'cctypes' => $this->CcType(),
                     'icons' => $this->getIcons(),
-//                    'interestFreeInstallments' => $this->interestFreeInstallments(),
                     'interestInstallments' => $this->calculatesInterest()
 
                 ]
@@ -163,19 +161,6 @@ class CreditCardProvider implements ConfigProviderInterface
         return $this->icons;
     }
 
-
-    /**
-     * Busca a quantidade de parcelas sem juros
-     *
-     * @return mixed
-     *
-     */
-//    public function interestFreeInstallments()
-//    {
-//        return $this->scopeConfig->getValue('payment/yapay_credit_card/interest-free_installments');
-//    }
-
-
     /**
      * Busca os juros de cada parcela
      *
@@ -203,7 +188,7 @@ class CreditCardProvider implements ConfigProviderInterface
     /**
      * Calcula os juros de cada parcela
      *
-     *
+     * @return array
      */
     public function calculatesInterest()
     {
@@ -227,6 +212,5 @@ class CreditCardProvider implements ConfigProviderInterface
 
 
     }
-
 
 }

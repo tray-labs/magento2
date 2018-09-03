@@ -154,6 +154,12 @@ class Capture extends Action
         $order->setStatus(Order::STATE_PENDING_PAYMENT);
     }
 
+    /**
+     * Método que troca o status da fatura
+     * @param $order
+     * @param $transactionId
+     * @param $isPayed
+     */
     protected function changePayment($order, $transactionId, $isPayed)
     {
         $invoices = $order->getInvoiceCollection();

@@ -4,8 +4,6 @@ namespace Yapay\Magento2\Model\Payment;
 
 
 use Yapay\Magento2\Helper\Data;
-use Magento\Checkout\Model\Cart;
-use Magento\Checkout\Model\Session;
 
 class TransferenceYapay extends PaymentAbstract
 {

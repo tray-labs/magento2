@@ -13,6 +13,11 @@ use Magento\Framework\App\ObjectManager;
 
 class PaymentApi
 {
+    /**
+     * Envia dados da transação para api do yapay
+     * @param $payment
+     * @return mixed
+     */
     public function generatePayment($payment)
     {
         $data_string = json_encode($payment);
@@ -33,7 +38,11 @@ class PaymentApi
         return $result;
     }
 
-
+    /**
+     * Consulta transação
+     * @param $transactionToken
+     * @return mixed
+     */
     public function getTransactionByTransactionToken($transactionToken) {
 
         $objectManager = ObjectManager::getInstance();

@@ -6,7 +6,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\App\ObjectManager;
 use Magento\Payment\Model\InfoInterface;
 use Yapay\Magento2\Helper\YapayData;
-use Magento\Sales\Model\Order;
 
 abstract class PaymentAbstract extends \Magento\Payment\Model\Method\AbstractMethod
 {
