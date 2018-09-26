@@ -2,6 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
+        <modules>
+            <Yapay_Magento2>
+                <version>1.0.1</version>
+            </Yapay_Magento2>
+        </modules>
         <payment>
             <yapay_credit_card>
                 <title>Yapay Intermediador - Cartão de Crédito</title>

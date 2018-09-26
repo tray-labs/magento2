@@ -102,7 +102,7 @@
                               valueUpdate: 'keyup' "/>
         </div>
     </div>
-    <div class="field number required">
+    <div class="field number required validate-cc-cvn validate-length maximum-length-3 minimum-length-3 validate-digits">
         <label data-bind="attr: {for: getCode() + '_cc_security_code'}" class="label">
             <span><!-- ko i18n: 'Código de segurança do cartão'--><!-- /ko --></span>
         </label>

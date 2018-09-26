@@ -69,6 +69,14 @@ class ValidationYapay extends \Magento\Framework\App\Helper\AbstractHelper
 
        }
 
+       if(!$this->validadeCvv($paymentOrder["additional_data"]["cc_security_code"])) {
+           throw new ValidatorException(new Phrase('Card security code invalid'));
+       }
+
+       if(!$this->validadeMonthYear($paymentOrder["additional_data"]["cc_exp_month"], $paymentOrder["additional_data"]["cc_exp_year"])) {
+           throw new ValidatorException(new Phrase('Date  card expiration invalid'));
+       }
+
        if($paymentOrder["additional_data"]["cc_card"] === self::JCB_PAYMENT_METHOD &&
            $paymentOrder["additional_data"]["cc_installments"] != 1) {
             throw new ValidatorException(new Phrase('JCB card does not accept parcels'));
@@ -76,6 +84,49 @@ class ValidationYapay extends \Magento\Framework\App\Helper\AbstractHelper
 
        return true;
     }
+
+    /**
+     * Realiza validacao do cvv do cartao de credito
+     * @param $cvv
+     * @return bool
+     */
+    public function validadeCvv($cvv)
+    {
+        $cvv = intval($cvv);
+        $cvv = strval($cvv);
+        if(strlen($cvv) == 3) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Realiza validacao da data de expiracao do cartao
+     *
+     * @param $month
+     * @param $year
+     * @return bool
+     */
+    public function validadeMonthYear($month, $year)
+    {
+        if(strlen($month) == 1) {
+            $date_expiration = '01-0' . $month . '-' . $year;
+        }
+        else {
+            $date_expiration = '01-' . $month . '-' . $year;
+        }
+        $current_date = '01' . '-' . date("m").'-'.date("Y") ;
+
+        if(strtotime($current_date) < strtotime($date_expiration))
+        {
+            return true;
+        }
+
+
+        return false;
+    }
+
 
 
     /**

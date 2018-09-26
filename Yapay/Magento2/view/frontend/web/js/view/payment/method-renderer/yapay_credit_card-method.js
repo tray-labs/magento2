@@ -13,6 +13,7 @@ define(
         'Yapay_Magento2/js/model/credit-card-validation/credit-card-number-validator',
         'Yapay_Magento2/js/model/credit-card-validation/custom',
         'Magento_Payment/js/model/credit-card-validation/credit-card-data',
+        'Magento_Checkout/js/action/select-shipping-address',
         'mage/translate'
     ],
     /**
@@ -44,7 +45,8 @@ define(
               checkoutData,
               cardNumberValidator,
               custom,
-              creditCardData
+              creditCardData,
+              selectShippingAddressAction
     ) {
         'use strict';
 
@@ -149,6 +151,7 @@ define(
                 this.creditCardVerificationNumber.subscribe(function(value) {
                     creditCardData.cvvCode = value;
                 });
+                this.getInstallments();
             },
 
             /**
@@ -224,15 +227,6 @@ define(
             },
 
             /**
-             * Busca a quantidade de parcelas sem juros
-             *
-             * @returns {*}
-             */
-            // getInterestFreeInstallments: function() {
-            //     return window.checkoutConfig.payment.yapay_credit_card.interestFreeInstallments;
-            // },
-
-            /**
              * Busca os juros de cada parcela
              *
              * @returns {*}
@@ -294,17 +288,6 @@ define(
                 });
             },
 
-
-            /**
-             * Retorna a quantidade parcelas sem juros para view
-             *
-             * @returns {*}
-             */
-            // getInterestFreeInstallmentsValues: function () {
-            //     console.log(this.getInterestFreeInstallments())
-            //     return this.getInterestFreeInstallments()
-            // },
-
             getInterestInstallmentsValues: function () {
                 return this.getInterestInstallments()
             },
@@ -318,11 +301,16 @@ define(
                 for (var i=0; i < this.getInstallments(); i++ ) {
                     $installmentArray[i] = i+1;
                 }
-
+                var total = quote.totals();
                 return _.map(this.getInterestInstallmentsValues(), function(value, key) {
+                    var totalInterest = total.grand_total + (total.grand_total * parseFloat(value)/100);
+                    var totalOrder = totalInterest.toFixed(2);
+                    var installmentsValue = totalOrder / (key + 1);
+                    var installmentsValueDecimal = installmentsValue.toFixed(2);
+
                     return {
                         'value': key + 1,
-                        'installment': value
+                        'installment': key+1 + ' x R$' + installmentsValueDecimal + ' Total à Pagar = R$' + totalOrder
                     }
                 });
             },

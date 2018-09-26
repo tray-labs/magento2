@@ -247,7 +247,6 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function generateTransaction($paymentData)
     {
-
         $order = $paymentData->getOrder();
         $payment = [];
         $payment["token_account"] = $this->getToken();
@@ -277,7 +276,8 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $payment["transaction"]["url_notification"] = $this->_getUrl('/').'yapay/notification/capture';
-        $payment["payment"] = [];
+        $payment["transaction"]["url_notification"] = $this->_getUrl('/').'yapay/notification/capture';
+        $payment["transaction"]["free"] = "MAGENTO_API_v" . $this->getVersionModule();
 
         $paymentInfo = $paymentData->getData('additional_information');
 
@@ -301,8 +301,6 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
         } else {
             $payment["payment"]["payment_method_id"] = $paymentInfo["payment_method_id"];;
         }
-
-
 
         $objectManager = ObjectManager::getInstance();
 
@@ -352,6 +350,12 @@ class YapayData extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $token = $this->_scopeConfig->getValue('payment/yapay_configuration/token_configuration_yapay', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         return $token;
+    }
+
+    public function getVersionModule()
+    {
+        $version = $this->_scopeConfig->getValue('modules/Yapay_Magento2/version', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        return $version;
     }
 
     /**

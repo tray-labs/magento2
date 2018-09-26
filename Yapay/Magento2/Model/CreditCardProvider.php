@@ -6,8 +6,6 @@ use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\View\Asset\Source;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Payment\Model\CcConfig;
-use Magento\Checkout\Model\Cart;
-use Magento\Framework\App\ObjectManager;
 
 /**
  * Class CreditCardProvider
@@ -64,7 +62,6 @@ class CreditCardProvider implements ConfigProviderInterface
      */
     public function getConfig()
     {
-        $this->calculatesInterest();
         return [
             'payment' => [
                 'yapay_credit_card' => [
@@ -75,7 +72,7 @@ class CreditCardProvider implements ConfigProviderInterface
                     'installments' => $this->Installment(),
                     'cctypes' => $this->CcType(),
                     'icons' => $this->getIcons(),
-                    'interestInstallments' => $this->calculatesInterest()
+                    'interestInstallments' => $this->interestInstallments()
 
                 ]
             ]
@@ -185,32 +182,31 @@ class CreditCardProvider implements ConfigProviderInterface
     }
 
 
-    /**
-     * Calcula os juros de cada parcela
-     *
-     * @return array
-     */
-    public function calculatesInterest()
-    {
-
-        $objectManager = ObjectManager::getInstance();
-
-        $cart = $objectManager->get(Cart::class);
-
-        $totalOrder = $cart->getQuote()->getData('grand_total');
-
-        $plotsContainingInterest = [];
-        $interestInstallment = $this->interestInstallments();
-
-        for($i = 0; $i < $this->Installment(); $i++) {
-            $totalOrderInterest = number_format($totalOrder + ($totalOrder * floatval($interestInstallment[$i])) / 100, 2, ',', '.');
-            $totalInstallment = number_format(floatval($totalOrderInterest) / ($i +1),  2, ',', '.');
-            array_push($plotsContainingInterest, $i+1 . ' x R$' .$totalInstallment. ' Total à Pagar = R$' .$totalOrderInterest);
-        }
-
-        return $plotsContainingInterest;
-
-
-    }
+//    /**
+//     * Calcula os juros de cada parcela
+//     *
+//     * @return array
+//     */
+//    public function calculatesInterest()
+//    {
+//
+//        $objectManager = ObjectManager::getInstance();
+//
+//        $cart = $objectManager->get(Cart::class);
+//
+//
+//        $totalOrder = $cart->getQuote()->getData('grand_total');
+//
+//        $plotsContainingInterest = [];
+//        $interestInstallment = $this->interestInstallments();
+//
+//        for($i = 0; $i < $this->Installment(); $i++) {
+//            $totalOrderInterest = number_format($totalOrder + ($totalOrder * floatval($interestInstallment[$i])) / 100, 2, ',', '.');
+//            $totalInstallment = number_format(floatval($totalOrderInterest) / ($i +1),  2, ',', '.');
+//            array_push($plotsContainingInterest, $i+1 . ' x R$' .$totalInstallment. ' Total à Pagar = R$' .$totalOrderInterest);
+//        }
+//
+//        return $plotsContainingInterest;
+//    }
 
 }
